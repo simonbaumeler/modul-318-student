@@ -49,7 +49,7 @@ namespace SwissTransport
         /// checks if the API returns a correct reply to a valid ConnectionRequest with specific Date and Time
         /// </summary>
         [TestMethod]
-        public void ConnectionsWithDateTiem()
+        public void ConnectionsWithDateTime()
         {
             testee = new Transport();
 

@@ -31,8 +31,10 @@ namespace SwissTransportGUI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabSearchConnection = new System.Windows.Forms.TabPage();
+            this.btShowStation = new System.Windows.Forms.Button();
             this.lblInfo2 = new System.Windows.Forms.Label();
             this.lstVwConnections = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -66,7 +68,7 @@ namespace SwissTransportGUI
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button1 = new System.Windows.Forms.Button();
+            this.wbBrwsr = new System.Windows.Forms.WebBrowser();
             this.tabControl.SuspendLayout();
             this.tabSearchConnection.SuspendLayout();
             this.tabTimetable.SuspendLayout();
@@ -85,7 +87,8 @@ namespace SwissTransportGUI
             // 
             // tabSearchConnection
             // 
-            this.tabSearchConnection.Controls.Add(this.button1);
+            this.tabSearchConnection.Controls.Add(this.wbBrwsr);
+            this.tabSearchConnection.Controls.Add(this.btShowStation);
             this.tabSearchConnection.Controls.Add(this.lblInfo2);
             this.tabSearchConnection.Controls.Add(this.lstVwConnections);
             this.tabSearchConnection.Controls.Add(this.dtTmPckr);
@@ -112,6 +115,18 @@ namespace SwissTransportGUI
             this.tabSearchConnection.TabIndex = 0;
             this.tabSearchConnection.Text = "Verbindung suchen";
             this.tabSearchConnection.UseVisualStyleBackColor = true;
+            // 
+            // btShowStation
+            // 
+            this.btShowStation.Enabled = false;
+            this.btShowStation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btShowStation.Location = new System.Drawing.Point(558, 32);
+            this.btShowStation.Name = "btShowStation";
+            this.btShowStation.Size = new System.Drawing.Size(154, 39);
+            this.btShowStation.TabIndex = 12;
+            this.btShowStation.Text = "Station auf Karte anzeigen";
+            this.btShowStation.UseVisualStyleBackColor = true;
+            this.btShowStation.Click += new System.EventHandler(this.btShowStation_Click);
             // 
             // lblInfo2
             // 
@@ -237,10 +252,10 @@ namespace SwissTransportGUI
             // btSearchConnection
             // 
             this.btSearchConnection.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.btSearchConnection.Location = new System.Drawing.Point(702, 35);
+            this.btSearchConnection.Location = new System.Drawing.Point(718, 32);
             this.btSearchConnection.Name = "btSearchConnection";
-            this.btSearchConnection.Size = new System.Drawing.Size(162, 69);
-            this.btSearchConnection.TabIndex = 12;
+            this.btSearchConnection.Size = new System.Drawing.Size(145, 69);
+            this.btSearchConnection.TabIndex = 13;
             this.btSearchConnection.Text = "Verbindung suchen";
             this.btSearchConnection.UseVisualStyleBackColor = true;
             this.btSearchConnection.Click += new System.EventHandler(this.BtSearchConnection_Click);
@@ -289,26 +304,25 @@ namespace SwissTransportGUI
             // rBArrive
             // 
             this.rBArrive.AutoSize = true;
-            this.rBArrive.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.rBArrive.Location = new System.Drawing.Point(579, 76);
+            this.rBArrive.Checked = true;
+            this.rBArrive.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rBArrive.Location = new System.Drawing.Point(558, 83);
             this.rBArrive.Name = "rBArrive";
-            this.rBArrive.Size = new System.Drawing.Size(104, 30);
+            this.rBArrive.Size = new System.Drawing.Size(72, 21);
             this.rBArrive.TabIndex = 11;
             this.rBArrive.TabStop = true;
-            this.rBArrive.Text = "Ankunft";
+            this.rBArrive.Text = "Abfahrt";
             this.rBArrive.UseVisualStyleBackColor = true;
             // 
             // rBGo
             // 
             this.rBGo.AutoSize = true;
-            this.rBGo.Checked = true;
-            this.rBGo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.rBGo.Location = new System.Drawing.Point(579, 38);
+            this.rBGo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rBGo.Location = new System.Drawing.Point(638, 83);
             this.rBGo.Name = "rBGo";
-            this.rBGo.Size = new System.Drawing.Size(100, 30);
+            this.rBGo.Size = new System.Drawing.Size(74, 21);
             this.rBGo.TabIndex = 10;
-            this.rBGo.TabStop = true;
-            this.rBGo.Text = "Abfahrt";
+            this.rBGo.Text = "Ankunft";
             this.rBGo.UseVisualStyleBackColor = true;
             // 
             // cmbBxGoal
@@ -433,14 +447,14 @@ namespace SwissTransportGUI
             this.columnHeader9.Text = "Betreiber";
             this.columnHeader9.Width = 135;
             // 
-            // button1
+            // wbBrwsr
             // 
-            this.button1.Location = new System.Drawing.Point(702, 115);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(162, 39);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.wbBrwsr.Location = new System.Drawing.Point(6, 176);
+            this.wbBrwsr.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wbBrwsr.Name = "wbBrwsr";
+            this.wbBrwsr.Size = new System.Drawing.Size(858, 446);
+            this.wbBrwsr.TabIndex = 18;
+            this.wbBrwsr.Visible = false;
             // 
             // Form1
             // 
@@ -450,10 +464,11 @@ namespace SwissTransportGUI
             this.ClientSize = new System.Drawing.Size(880, 648);
             this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "ÖV-Life";
             this.tabControl.ResumeLayout(false);
             this.tabSearchConnection.ResumeLayout(false);
             this.tabSearchConnection.PerformLayout();
@@ -500,6 +515,7 @@ namespace SwissTransportGUI
         private ColumnHeader columnHeader7;
         private ColumnHeader columnHeader8;
         private ColumnHeader columnHeader9;
-        private Button button1;
+        private Button btShowStation;
+        private WebBrowser wbBrwsr;
     }
 }

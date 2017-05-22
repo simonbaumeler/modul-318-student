@@ -81,6 +81,7 @@ namespace SwissTransportGUI
                 if (cmbBxStart.Text == string.Empty || cmbBxGoal.Text == string.Empty)
                 {
                     MessageBox.Show("Bitte füllen Sie mindestens Abfahrts-/ und Zeilort aus!", "SwissTransport Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    btShowStation.Enabled = false;
                 }
 
                 else if (MTxtbxDate.Text != DateTime.Today.ToString() || MTxtbxTime.Text != DateTime.Now.TimeOfDay.ToString())
@@ -98,7 +99,7 @@ namespace SwissTransportGUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Es ist ein unerwarteter Fehler aufgetreten {Environment.NewLine} Message: {ex.Message}", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Message: {ex.Message} {Environment.NewLine} bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         
@@ -111,6 +112,7 @@ namespace SwissTransportGUI
             lblInfo2.Location = new Point(3, 140);
             lblInfo.Text = $"Ergebnisse für Ihre Suche von {cmbBxStart.Text} nach {cmbBxGoal.Text}";
             lblInfo2.Text = $"am {MTxtbxDate.Text} um {MTxtbxTime.Text} Uhr";
+            btShowStation.Enabled = true;           
         }
 
         /// <summary>
@@ -220,7 +222,7 @@ namespace SwissTransportGUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Es ist ein unerwarteter Fehler aufgetreten {Environment.NewLine} Message: {ex.Message}", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Message: {ex.Message}{Environment.NewLine} bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -249,7 +251,7 @@ namespace SwissTransportGUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Es ist ein unerwarteter Fehler aufgetreten {Environment.NewLine} Message: {ex.Message}", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Message: {ex.Message}{Environment.NewLine} bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -273,7 +275,7 @@ namespace SwissTransportGUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Es ist ein unerwarteter Fehler aufgetreten {Environment.NewLine} Message: {ex.Message}", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Message: {ex.Message}{Environment.NewLine} bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -301,7 +303,55 @@ namespace SwissTransportGUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Es ist ein unerwarteter Fehler aufgetreten {Environment.NewLine} Message: {ex.Message}", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Message: {ex.Message}{Environment.NewLine} bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Shows or hides the WebBrowser Controll and builds up the correct URI to get a view of the chosen Location
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btShowStation_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var cmbBxName = new ComboBox();
+
+                if (rBArrive.Checked)
+                {
+                    cmbBxName = cmbBxStart;
+                }
+                else
+                {
+                    cmbBxName = cmbBxGoal;
+                }
+
+                var button = (Button)sender;
+
+                if(button.Text == "Karte verbergen")
+                {
+                    wbBrwsr.Visible = false;
+                    button.Text = "Station auf Karte anzeigen";
+                    return;
+                }
+
+                if(cmbBxStart.Text == string.Empty)
+                {
+                    MessageBox.Show("Bitte füllen Sie mindestens Abfahrts-/ und Zeilort aus!", "SwissTransport Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    btShowStation.Enabled = false;
+                }
+                var station = transpotinstance.GetStations(cmbBxName.Text).StationList.First();
+
+                var uri = "https://wego.here.com/?map=" + station.Coordinate.XCoordinate.ToString() + "," + station.Coordinate.YCoordinate.ToString() + ",17,satellite";
+
+                wbBrwsr.Url = new Uri(uri);
+                wbBrwsr.Visible = true;
+                btShowStation.Text = "Karte verbergen";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Message: {ex.Message}{Environment.NewLine} bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
