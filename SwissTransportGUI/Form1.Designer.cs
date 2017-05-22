@@ -440,7 +440,7 @@ namespace SwissTransportGUI
             // 
             this.columnHeader8.Text = "Zielhaltestelle";
             this.columnHeader8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader8.Width = 168;
+            this.columnHeader8.Width = 295;
             // 
             // columnHeader9
             // 
