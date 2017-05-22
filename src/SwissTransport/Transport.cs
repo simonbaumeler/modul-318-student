@@ -1,6 +1,6 @@
-﻿using System.IO;
+﻿using Newtonsoft.Json;
+using System.IO;
 using System.Net;
-using Newtonsoft.Json;
 
 namespace SwissTransport
 {
@@ -17,6 +17,23 @@ namespace SwissTransport
                 var message = new StreamReader(responseStream).ReadToEnd();
                 var stations = JsonConvert.DeserializeObject<Stations>(message);
                 return stations;
+            }
+
+            return null;
+        }
+
+        public StationBoardRoot GetStationBoard(string station)
+        {
+            var request = CreateWebRequest("http://transport.opendata.ch/v1/stationboard?Station=" + station);
+            var response = request.GetResponse();
+            var responseStream = response.GetResponseStream();
+
+            if (responseStream != null)
+            {
+                var readToEnd = new StreamReader(responseStream).ReadToEnd();
+                var stationboard =
+                    JsonConvert.DeserializeObject<StationBoardRoot>(readToEnd);
+                return stationboard;
             }
 
             return null;
