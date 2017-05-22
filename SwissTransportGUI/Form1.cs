@@ -68,7 +68,9 @@ namespace SwissTransportGUI
         }
 
         /// <summary>
-        /// 
+        /// Checks if Destionation- or Startstring is empty and returns a messageBox with a Warning if true
+        /// Checks if the Time and Date are not the actual and makes a Request with userdefined Date and Time if true and calls FillConectionListView() and WriteInfos()
+        /// if the other two clauses were false, it creates a request with actuall Date and Time and calls FillConectionListView() and WriteInfos()
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -80,9 +82,16 @@ namespace SwissTransportGUI
                 {
                     MessageBox.Show("Bitte füllen Sie mindestens Abfahrts-/ und Zeilort aus!", "SwissTransport Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+
+                else if (MTxtbxDate.Text != DateTime.Today.ToString() || MTxtbxTime.Text != DateTime.Now.TimeOfDay.ToString())
+                {                  
+                    Connections = transpotinstance.GetConnections(cmbBxStart.Text, cmbBxGoal.Text, MTxtbxDate.Text, MTxtbxTime.Text).ConnectionList;
+                    FillConnectionListView();
+                    WriteInfos();
+                }
                 else
                 {
-                    lstVwConnections.Items.Clear();
+                    Connections = transpotinstance.GetConnections(cmbBxStart.Text, cmbBxGoal.Text).ConnectionList;
                     FillConnectionListView();
                     WriteInfos();
                 }
@@ -105,11 +114,11 @@ namespace SwissTransportGUI
         }
 
         /// <summary>
-        /// Gets all Connections from the Transport Class and fills the lstVwConnections Listview with all given Connections
+        /// clears the lstVwConnections Listview and refills it with all given Connections
         /// </summary>
         private void FillConnectionListView()
-        {
-            Connections = transpotinstance.GetConnections(cmbBxStart.Text, cmbBxGoal.Text).ConnectionList;
+        {         
+            lstVwConnections.Items.Clear();
 
             foreach (var connection in Connections)
             {

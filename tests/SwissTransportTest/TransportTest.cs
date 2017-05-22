@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace SwissTransport
 {
@@ -41,6 +43,35 @@ namespace SwissTransport
             var connections = testee.GetConnections("Sursee", "Luzern");
 
             Assert.IsNotNull(connections);
+        }
+
+        /// <summary>
+        /// checks if the API returns a correct reply to a valid ConnectionRequest with specific Date and Time
+        /// </summary>
+        [TestMethod]
+        public void ConnectionsWithDateTiem()
+        {
+            testee = new Transport();
+
+            var connections = testee.GetConnections("Sursee", "Luzern", DateTime.Today.ToString("dd-MM-yyyy"), "12:30");
+
+            var currentTime = Convert.ToDateTime("12:30");
+
+            var times = new List<DateTime>();
+
+
+            foreach(var connection in connections.ConnectionList)
+            {
+                times.Add(Convert.ToDateTime(connection.From.Departure));
+
+                var datetime = Convert.ToDateTime(connection.From.Departure);
+                connection.From.Departure = datetime.ToString("dd-MM-yyyy");
+            }
+
+
+            Assert.IsNotNull(connections);
+            Assert.IsTrue(connections.ConnectionList.TrueForAll(x => x.From.Departure == DateTime.Today.ToString("dd-MM-yyyy")));
+            Assert.IsTrue(times.TrueForAll(x => x >= currentTime));
         }
     }
 }

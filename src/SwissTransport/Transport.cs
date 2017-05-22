@@ -122,6 +122,34 @@ namespace SwissTransport
         }
 
         /// <summary>
+        /// Creates a RequestUrl with Date and Time, passes it to the CreateWebRequest and reads out the Result
+        /// than deserializes the Answer to a Connection object
+        /// </summary>
+        /// <param name="fromStation"></param>
+        /// <param name="toStattion"></param>
+        /// <param name="date">YY-MM-DD</param>
+        /// <param name="time">HH-mm</param>
+        /// <returns>a Connections object with all Connections</returns>
+        public Connections GetConnections(string fromStation, string toStattion, string date, string time)
+        {
+            date = date.Replace('.', '-');
+            var datetime = date + "T" + time;
+            var request = CreateWebRequest("http://transport.opendata.ch/v1/connections?from=" + fromStation + "&to=" + toStattion + "&datetime=" + datetime);
+            var response = request.GetResponse();
+            var responseStream = response.GetResponseStream();
+
+            if (responseStream != null)
+            {
+                var readToEnd = new StreamReader(responseStream).ReadToEnd();
+                var connections =
+                    JsonConvert.DeserializeObject<Connections>(readToEnd);
+                return connections;
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Creates a Request and returns the answer from the API
         /// </summary>
         /// <param name="url"></param>

@@ -66,6 +66,7 @@ namespace SwissTransportGUI
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabSearchConnection.SuspendLayout();
             this.tabTimetable.SuspendLayout();
@@ -84,6 +85,7 @@ namespace SwissTransportGUI
             // 
             // tabSearchConnection
             // 
+            this.tabSearchConnection.Controls.Add(this.button1);
             this.tabSearchConnection.Controls.Add(this.lblInfo2);
             this.tabSearchConnection.Controls.Add(this.lstVwConnections);
             this.tabSearchConnection.Controls.Add(this.dtTmPckr);
@@ -168,12 +170,12 @@ namespace SwissTransportGUI
             this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader4.Width = 194;
             // 
-            // dateTimePicker1
+            // dtTmPckr
             // 
             this.dtTmPckr.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.dtTmPckr.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtTmPckr.Location = new System.Drawing.Point(402, 35);
-            this.dtTmPckr.Name = "dateTimePicker1";
+            this.dtTmPckr.Name = "dtTmPckr";
             this.dtTmPckr.Size = new System.Drawing.Size(17, 31);
             this.dtTmPckr.TabIndex = 4;
             this.dtTmPckr.ValueChanged += new System.EventHandler(this.DateTimePicker1_ValueChanged);
@@ -431,6 +433,15 @@ namespace SwissTransportGUI
             this.columnHeader9.Text = "Betreiber";
             this.columnHeader9.Width = 135;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(702, 115);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(162, 39);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AcceptButton = this.btSearchConnection;
@@ -474,16 +485,6 @@ namespace SwissTransportGUI
         private System.Windows.Forms.Button btnMinuteOn;
         private System.Windows.Forms.Button btnMinuteBack;
         private System.Windows.Forms.DateTimePicker dtTmPckr;
-        private EventHandler cmbBxGoal_DropDown;
-        private EventHandler dateTimePicker1_ValueChanged;
-        private EventHandler btnMinuteOn_Click;
-        private EventHandler btnDayOn_Click;
-        private EventHandler btnMinuteBack_Click;
-        private EventHandler btnDayBack_Click;
-        private DataGridViewCellEventHandler dataGridView1_CellContentClick;
-        private EventHandler btSearchConnection_Click;
-        private EventHandler cmbBxStart_DropDown;
-        private DataGridViewCellEventHandler dataGridView1_CellContentClick_1;
         private ListView lstVwConnections;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader3;
@@ -499,5 +500,6 @@ namespace SwissTransportGUI
         private ColumnHeader columnHeader7;
         private ColumnHeader columnHeader8;
         private ColumnHeader columnHeader9;
+        private Button button1;
     }
 }
