@@ -7,6 +7,9 @@ namespace SwissTransport
     {
         private ITransport testee;
 
+        /// <summary>
+        /// Checks if the API returns a Valid number of Replies to a correct Request
+        /// </summary>
         [TestMethod]
         public void Locations()
         {
@@ -16,6 +19,9 @@ namespace SwissTransport
             Assert.AreEqual(50, stations.StationList.Count);
         }
 
+        /// <summary>
+        /// Checks if the API returns a reply to a valid StationBoardrequest 
+        /// </summary>
         [TestMethod]
         public void StationBoard()
         {
@@ -25,6 +31,9 @@ namespace SwissTransport
             Assert.IsNotNull(stationBoard);
         }
 
+        /// <summary>
+        /// Checks if the API returns a reply to a valid Connectionrequest 
+        /// </summary>
         [TestMethod]
         public void Connections()
         {
