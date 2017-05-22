@@ -1,12 +1,8 @@
 ﻿using SwissTransport;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SwissTransportGUI
@@ -19,27 +15,27 @@ namespace SwissTransportGUI
         /// <summary>
         /// The Time of the Connectionsearch
         /// </summary>
-        private TimeSpan Time;
+        private TimeSpan time;
 
         /// <summary>
         ///  The Date of the Connectionsearch
         /// </summary>
-        private DateTime Date;
+        private DateTime date;
 
         /// <summary>
         /// The List of Stations  
         /// </summary>
-        private List<Station> Stations;
+        private List<Station> stations;
 
         /// <summary>
         /// The List of Connections
         /// </summary>
-        private List<Connection> Connections;
+        private List<Connection> connections;
 
         /// <summary>
         /// The List of StationBoards
         /// </summary>
-        private List<StationBoard> StadionBoards;
+        private List<StationBoard> stadionBoards;
 
         /// <summary>
         /// The Instance of the Transport Class
@@ -47,7 +43,7 @@ namespace SwissTransportGUI
         private Transport transpotinstance;
 
         /// <summary>
-        /// Standart Constructor of the Form1
+        /// Initializes a new instance of the <see cref="Form1"/> class // Standart Constructor of the Form1
         /// </summary>
         public Form1()
         {
@@ -60,10 +56,10 @@ namespace SwissTransportGUI
         /// </summary>
         private void InitializeData()
         {
-            Time = DateTime.Now.TimeOfDay;
-            Date = DateTime.Today;
-            MTxtbxTime.Text = Time.ToString();
-            MTxtbxDate.Text = Date.ToString();
+            time = DateTime.Now.TimeOfDay;
+            date = DateTime.Today;
+            MTxtbxTime.Text = time.ToString();
+            MTxtbxDate.Text = date.ToString();
             transpotinstance = new Transport();
         }
 
@@ -72,8 +68,8 @@ namespace SwissTransportGUI
         /// Checks if the Time and Date are not the actual and makes a Request with userdefined Date and Time if true and calls FillConectionListView() and WriteInfos()
         /// if the other two clauses were false, it creates a request with actuall Date and Time and calls FillConectionListView() and WriteInfos()
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">senderobject</param>
+        /// <param name="e">eventargs</param>
         private void BtSearchConnection_Click(object sender, EventArgs e)
         {
             try
@@ -83,16 +79,15 @@ namespace SwissTransportGUI
                     MessageBox.Show("Bitte füllen Sie mindestens Abfahrts-/ und Zeilort aus!", "SwissTransport Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     btShowStation.Enabled = false;
                 }
-
                 else if (MTxtbxDate.Text != DateTime.Today.ToString() || MTxtbxTime.Text != DateTime.Now.TimeOfDay.ToString())
                 {                  
-                    Connections = transpotinstance.GetConnections(cmbBxStart.Text, cmbBxGoal.Text, MTxtbxDate.Text, MTxtbxTime.Text).ConnectionList;
+                    connections = transpotinstance.GetConnections(cmbBxStart.Text, cmbBxGoal.Text, MTxtbxDate.Text, MTxtbxTime.Text).ConnectionList;
                     FillConnectionListView();
                     WriteInfos();
                 }
                 else
                 {
-                    Connections = transpotinstance.GetConnections(cmbBxStart.Text, cmbBxGoal.Text).ConnectionList;
+                    connections = transpotinstance.GetConnections(cmbBxStart.Text, cmbBxGoal.Text).ConnectionList;
                     FillConnectionListView();
                     WriteInfos();
                 }
@@ -122,7 +117,7 @@ namespace SwissTransportGUI
         {         
             lstVwConnections.Items.Clear();
 
-            foreach (var connection in Connections)
+            foreach (var connection in connections)
             {
                 var listViewItem = new ListViewItem(GetFormattedDateString(connection.From.Departure));
                 listViewItem.SubItems.Add(GetFormattedDateString(connection.To.Arrival));
@@ -136,9 +131,9 @@ namespace SwissTransportGUI
         /// <summary>
         /// Returns string with the formatted Date
         /// </summary>
-        /// <param name="date"></param>
+        /// <param name="date">unformatted date</param>
         /// <returns>formatted Date as String (HH:mm)</returns>
-        private string GetFormattedDateString (string date)
+        private string GetFormattedDateString(string date)
         {
             var formattedDate = Convert.ToDateTime(date);
             return formattedDate.ToString("HH:mm");
@@ -147,9 +142,9 @@ namespace SwissTransportGUI
         /// <summary>
         /// Returns string with the formatted String
         /// </summary>
-        /// <param name="time"></param>
+        /// <param name="time">unformated date</param>
         /// <returns>for GUI formatted Time as String (HH:mm:ss)</returns>
-        private string GetFormattedDurationString (string time)
+        private string GetFormattedDurationString(string time)
         {        
             return time.Replace("00d", string.Empty);
         }
@@ -157,64 +152,64 @@ namespace SwissTransportGUI
         /// <summary>
         /// Decrements 1 Day from the Date 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">senderobject</param>
+        /// <param name="e">eventargs</param>
         private void BtnDayBack_Click(object sender, EventArgs e)
         {
-            Date = Date.AddDays(-1);
-            MTxtbxDate.Text = Date.ToString();
+            date = date.AddDays(-1);
+            MTxtbxDate.Text = date.ToString();
         }
 
         /// <summary>
         /// Icrements the Date by 1 Day
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">senderobject</param>
+        /// <param name="e">eventargs</param>
         private void BtnDayOn_Click(object sender, EventArgs e)
         {
-            Date = Date.AddDays(1);
-            MTxtbxDate.Text = Date.ToString();
+            date = date.AddDays(1);
+            MTxtbxDate.Text = date.ToString();
         }
 
         /// <summary>
         /// Icrements the Time by 1 Minute
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">senderobject</param>
+        /// <param name="e">eventargs</param>
         private void BtnMinuteOn_Click(object sender, EventArgs e)
         {
-            Time = Time.Add(new TimeSpan(00, 01, 00));
-            MTxtbxTime.Text = Time.ToString();
+            time = time.Add(new TimeSpan(00, 01, 00));
+            MTxtbxTime.Text = time.ToString();
         }
 
         /// <summary>
         /// Decrements the Time by 1 Minute
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">senderobject</param>
+        /// <param name="e">eventargs</param>
         private void BtnMinuteBack_Click(object sender, EventArgs e)
         {
-            Time = Time.Add(new TimeSpan(00, -1, 00));
-            MTxtbxTime.Text = Time.ToString();
+            time = time.Add(new TimeSpan(00, -1, 00));
+            MTxtbxTime.Text = time.ToString();
         }
 
         /// <summary>
         /// Sets the Date to the picked Value of the DateTimePicker
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">senderobject</param>
+        /// <param name="e">eventargs</param>
         private void DateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            Date = dtTmPckr.Value;
-            MTxtbxDate.Text = Date.ToShortDateString();
+            date = dtTmPckr.Value;
+            MTxtbxDate.Text = date.ToShortDateString();
         }
 
         /// <summary>
         /// Occurs when ever the Dropdownlist drops down and Calls the LoadStation(sender) Method
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void comboBox_DropDown(object sender, EventArgs e)
+        /// <param name="sender">senderobject</param>
+        /// <param name="e">eventargs</param>
+        private void ComboBox_DropDown(object sender, EventArgs e)
         {
             try
             {
@@ -226,27 +221,26 @@ namespace SwissTransportGUI
             }
         }
 
-
         /// <summary>
         /// casts the input param sender to a comboBox and fills it with the Stations coming from the Transport Class
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">senderobject</param>
         private void LoadStations(object sender)
         {
             try
             {
                 var combobox = (ComboBox)sender;
 
-                if (Stations != null)
+                if (stations != null)
                 {
                     combobox.Items.Clear();
                 }
 
-                Stations = transpotinstance.GetStations(combobox.Text).StationList;
+                stations = transpotinstance.GetStations(combobox.Text).StationList;
 
-                foreach (var Station in Stations)
+                foreach (var station in stations)
                 {
-                    combobox.Items.Add(Station.Name);
+                    combobox.Items.Add(station.Name);
                 }
             }
             catch (Exception ex)
@@ -258,9 +252,9 @@ namespace SwissTransportGUI
         /// <summary>
         /// Checks if the cmxBxTimeTable.Text is null or emtpy and calls the FillStationListView(string station) Method if not
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btShowTimeTable_Click(object sender, EventArgs e)
+        /// <param name="sender">senderobject</param>
+        /// <param name="e">eventargs</param>
+        private void BtShowTimeTable_Click(object sender, EventArgs e)
         {
             try
             {
@@ -282,17 +276,17 @@ namespace SwissTransportGUI
         /// <summary>
         /// Gets the Station object with the given Text, clears the ListView of the TimeTable and Refills it
         /// </summary>
-        /// <param name="station"></param>
+        /// <param name="station">name of the station</param>
         private void FillStationListView(string station)
         {
             try
             {
-                var searchedStation = Stations.First(x => x.Name == station);
-                StadionBoards = transpotinstance.GetStationBoard(searchedStation.Name, searchedStation.Id).Entries;
+                var searchedStation = stations.First(x => x.Name == station);
+                stadionBoards = transpotinstance.GetStationBoard(searchedStation.Name, searchedStation.Id).Entries;
 
                 lstVwTimetable.Items.Clear();
 
-                foreach(var stationboard in StadionBoards)
+                foreach (var stationboard in stadionBoards)
                 {
                     var listViewItem = new ListViewItem(stationboard.Number);
                     listViewItem.SubItems.Add(stationboard.Stop.Departure.ToString("HH:mm"));
@@ -310,9 +304,9 @@ namespace SwissTransportGUI
         /// <summary>
         /// Shows or hides the WebBrowser Controll and builds up the correct URI to get a view of the chosen Location
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btShowStation_Click(object sender, EventArgs e)
+        /// <param name="sender">senderobject</param>
+        /// <param name="e">eventargs</param>
+        private void BtShowStation_Click(object sender, EventArgs e)
         {
             try
             {
@@ -329,18 +323,19 @@ namespace SwissTransportGUI
 
                 var button = (Button)sender;
 
-                if(button.Text == "Karte verbergen")
+                if (button.Text == "Karte verbergen")
                 {
                     wbBrwsr.Visible = false;
                     button.Text = "Station auf Karte anzeigen";
                     return;
                 }
 
-                if(cmbBxStart.Text == string.Empty)
+                if (cmbBxStart.Text == string.Empty)
                 {
                     MessageBox.Show("Bitte füllen Sie mindestens Abfahrts-/ und Zeilort aus!", "SwissTransport Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     btShowStation.Enabled = false;
                 }
+
                 var station = transpotinstance.GetStations(cmbBxName.Text).StationList.First();
 
                 var uri = "https://wego.here.com/?map=" + station.Coordinate.XCoordinate.ToString() + "," + station.Coordinate.YCoordinate.ToString() + ",17,satellite";

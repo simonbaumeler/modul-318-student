@@ -126,7 +126,7 @@ namespace SwissTransportGUI
             this.btShowStation.TabIndex = 12;
             this.btShowStation.Text = "Station auf Karte anzeigen";
             this.btShowStation.UseVisualStyleBackColor = true;
-            this.btShowStation.Click += new System.EventHandler(this.btShowStation_Click);
+            this.btShowStation.Click += new System.EventHandler(this.BtShowStation_Click);
             // 
             // lblInfo2
             // 
@@ -333,7 +333,7 @@ namespace SwissTransportGUI
             this.cmbBxGoal.Name = "cmbBxGoal";
             this.cmbBxGoal.Size = new System.Drawing.Size(192, 32);
             this.cmbBxGoal.TabIndex = 2;
-            this.cmbBxGoal.DropDown += new System.EventHandler(this.comboBox_DropDown);
+            this.cmbBxGoal.DropDown += new System.EventHandler(this.ComboBox_DropDown);
             // 
             // cmbBxStart
             // 
@@ -343,7 +343,7 @@ namespace SwissTransportGUI
             this.cmbBxStart.Name = "cmbBxStart";
             this.cmbBxStart.Size = new System.Drawing.Size(192, 32);
             this.cmbBxStart.TabIndex = 1;
-            this.cmbBxStart.DropDown += new System.EventHandler(this.comboBox_DropDown);
+            this.cmbBxStart.DropDown += new System.EventHandler(this.ComboBox_DropDown);
             // 
             // label2
             // 
@@ -388,7 +388,7 @@ namespace SwissTransportGUI
             this.btShowTimeTable.TabIndex = 4;
             this.btShowTimeTable.Text = "Anzeigen";
             this.btShowTimeTable.UseVisualStyleBackColor = true;
-            this.btShowTimeTable.Click += new System.EventHandler(this.btShowTimeTable_Click);
+            this.btShowTimeTable.Click += new System.EventHandler(this.BtShowTimeTable_Click);
             // 
             // lblTimeTable
             // 
@@ -408,7 +408,7 @@ namespace SwissTransportGUI
             this.cmbBxTimeTable.Name = "cmbBxTimeTable";
             this.cmbBxTimeTable.Size = new System.Drawing.Size(192, 32);
             this.cmbBxTimeTable.TabIndex = 2;
-            this.cmbBxTimeTable.DropDown += new System.EventHandler(this.comboBox_DropDown);
+            this.cmbBxTimeTable.DropDown += new System.EventHandler(this.ComboBox_DropDown);
             // 
             // lstVwTimetable
             // 
