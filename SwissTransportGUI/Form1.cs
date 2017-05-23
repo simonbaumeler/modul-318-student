@@ -367,7 +367,7 @@ namespace SwissTransportGUI
 
                 if (cmbBxStart.Text == string.Empty)
                 {
-                    MessageBox.Show("Bitte füllen Sie mindestens Abfahrts-/ und Zeilort aus!", "SwissTransport Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Bitte füllen Sie mindestens Abfahrts-/ und Zielort aus!", "SwissTransport Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     btShowStation.Enabled = false;
                 }
 
