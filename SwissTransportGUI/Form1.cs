@@ -92,9 +92,9 @@ namespace SwissTransportGUI
                     WriteInfos();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Message: {ex.Message} {Environment.NewLine} bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         
@@ -156,8 +156,15 @@ namespace SwissTransportGUI
         /// <param name="e">eventargs</param>
         private void BtnDayBack_Click(object sender, EventArgs e)
         {
-            date = date.AddDays(-1);
-            MTxtbxDate.Text = date.ToString();
+            try
+            {
+                date = date.AddDays(-1);
+                MTxtbxDate.Text = date.ToString();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -167,8 +174,15 @@ namespace SwissTransportGUI
         /// <param name="e">eventargs</param>
         private void BtnDayOn_Click(object sender, EventArgs e)
         {
-            date = date.AddDays(1);
-            MTxtbxDate.Text = date.ToString();
+            try
+            {
+                date = date.AddDays(1);
+                MTxtbxDate.Text = date.ToString();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -178,8 +192,15 @@ namespace SwissTransportGUI
         /// <param name="e">eventargs</param>
         private void BtnMinuteOn_Click(object sender, EventArgs e)
         {
-            time = time.Add(new TimeSpan(00, 01, 00));
-            MTxtbxTime.Text = time.ToString();
+            try
+            {
+                time = time.Add(new TimeSpan(00, 01, 00));
+                MTxtbxTime.Text = time.ToString();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -189,8 +210,15 @@ namespace SwissTransportGUI
         /// <param name="e">eventargs</param>
         private void BtnMinuteBack_Click(object sender, EventArgs e)
         {
-            time = time.Add(new TimeSpan(00, -1, 00));
-            MTxtbxTime.Text = time.ToString();
+            try
+            {
+                time = time.Add(new TimeSpan(00, -1, 00));
+                MTxtbxTime.Text = time.ToString();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -200,8 +228,15 @@ namespace SwissTransportGUI
         /// <param name="e">eventargs</param>
         private void DateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            date = dtTmPckr.Value;
-            MTxtbxDate.Text = date.ToShortDateString();
+            try
+            {
+                date = dtTmPckr.Value;
+                MTxtbxDate.Text = date.ToShortDateString();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -215,9 +250,9 @@ namespace SwissTransportGUI
             {
                 LoadStations(sender);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Message: {ex.Message}{Environment.NewLine} bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -243,9 +278,9 @@ namespace SwissTransportGUI
                     combobox.Items.Add(station.Name);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Message: {ex.Message}{Environment.NewLine} bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -267,9 +302,9 @@ namespace SwissTransportGUI
                     FillStationListView(cmbBxTimeTable.Text);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Message: {ex.Message}{Environment.NewLine} bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -295,9 +330,9 @@ namespace SwissTransportGUI
                     lstVwTimetable.Items.Add(listViewItem);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Message: {ex.Message}{Environment.NewLine} bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -344,9 +379,9 @@ namespace SwissTransportGUI
                 wbBrwsr.Visible = true;
                 btShowStation.Text = "Karte verbergen";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Message: {ex.Message}{Environment.NewLine} bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Bei der letzten Aktion ist ein Fehler aufgetreten {Environment.NewLine} Bitte überprüfen Sie Ihre Angaben und probieren Sie es erneut.", "SwissTransport Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
