@@ -34,6 +34,7 @@ namespace SwissTransportGUI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabSearchConnection = new System.Windows.Forms.TabPage();
+            this.wbBrwsr = new System.Windows.Forms.WebBrowser();
             this.btShowStation = new System.Windows.Forms.Button();
             this.lblInfo2 = new System.Windows.Forms.Label();
             this.lstVwConnections = new System.Windows.Forms.ListView();
@@ -68,7 +69,6 @@ namespace SwissTransportGUI
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.wbBrwsr = new System.Windows.Forms.WebBrowser();
             this.tabControl.SuspendLayout();
             this.tabSearchConnection.SuspendLayout();
             this.tabTimetable.SuspendLayout();
@@ -115,6 +115,15 @@ namespace SwissTransportGUI
             this.tabSearchConnection.TabIndex = 0;
             this.tabSearchConnection.Text = "Verbindung suchen";
             this.tabSearchConnection.UseVisualStyleBackColor = true;
+            // 
+            // wbBrwsr
+            // 
+            this.wbBrwsr.Location = new System.Drawing.Point(6, 176);
+            this.wbBrwsr.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wbBrwsr.Name = "wbBrwsr";
+            this.wbBrwsr.Size = new System.Drawing.Size(858, 446);
+            this.wbBrwsr.TabIndex = 18;
+            this.wbBrwsr.Visible = false;
             // 
             // btShowStation
             // 
@@ -382,7 +391,7 @@ namespace SwissTransportGUI
             // btShowTimeTable
             // 
             this.btShowTimeTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.btShowTimeTable.Location = new System.Drawing.Point(6, 98);
+            this.btShowTimeTable.Location = new System.Drawing.Point(8, 73);
             this.btShowTimeTable.Name = "btShowTimeTable";
             this.btShowTimeTable.Size = new System.Drawing.Size(192, 57);
             this.btShowTimeTable.TabIndex = 4;
@@ -396,15 +405,15 @@ namespace SwissTransportGUI
             this.lblTimeTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.lblTimeTable.Location = new System.Drawing.Point(3, 7);
             this.lblTimeTable.Name = "lblTimeTable";
-            this.lblTimeTable.Size = new System.Drawing.Size(156, 50);
+            this.lblTimeTable.Size = new System.Drawing.Size(108, 25);
             this.lblTimeTable.TabIndex = 3;
-            this.lblTimeTable.Text = "Wählen Sie eine\r\nHaltestelle:";
+            this.lblTimeTable.Text = "Haltestelle:";
             // 
             // cmbBxTimeTable
             // 
             this.cmbBxTimeTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.cmbBxTimeTable.FormattingEnabled = true;
-            this.cmbBxTimeTable.Location = new System.Drawing.Point(6, 60);
+            this.cmbBxTimeTable.Location = new System.Drawing.Point(8, 35);
             this.cmbBxTimeTable.Name = "cmbBxTimeTable";
             this.cmbBxTimeTable.Size = new System.Drawing.Size(192, 32);
             this.cmbBxTimeTable.TabIndex = 2;
@@ -446,15 +455,6 @@ namespace SwissTransportGUI
             // 
             this.columnHeader9.Text = "Betreiber";
             this.columnHeader9.Width = 135;
-            // 
-            // wbBrwsr
-            // 
-            this.wbBrwsr.Location = new System.Drawing.Point(6, 176);
-            this.wbBrwsr.MinimumSize = new System.Drawing.Size(20, 20);
-            this.wbBrwsr.Name = "wbBrwsr";
-            this.wbBrwsr.Size = new System.Drawing.Size(858, 446);
-            this.wbBrwsr.TabIndex = 18;
-            this.wbBrwsr.Visible = false;
             // 
             // Form1
             // 

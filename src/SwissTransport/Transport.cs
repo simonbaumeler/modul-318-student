@@ -106,19 +106,19 @@ namespace SwissTransport
         /// <returns>a Connections object with all Connections</returns>
         public Connections GetConnections(string fromStation, string toStattion)
         {
-            var request = CreateWebRequest("http://transport.opendata.ch/v1/connections?from=" + fromStation + "&to=" + toStattion);
-            var response = request.GetResponse();
-            var responseStream = response.GetResponseStream();
+            //var request = CreateWebRequest("http://transport.opendata.ch/v1/connections?from=" + fromStation + "&to=" + toStattion);
+            //var response = request.GetResponse();
+            //var responseStream = response.GetResponseStream();
 
-            if (responseStream != null)
-            {
-                var readToEnd = new StreamReader(responseStream).ReadToEnd();
-                var connections =
-                    JsonConvert.DeserializeObject<Connections>(readToEnd);
-                return connections;
-            }
+            //if (responseStream != null)
+            //{
+            //    var readToEnd = new StreamReader(responseStream).ReadToEnd();
+            //    var connections =
+            //        JsonConvert.DeserializeObject<Connections>(readToEnd);
+            //    return connections;
+            //}
 
-            return null;
+            return GetConnections(fromStation, toStattion, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
         }
 
         /// <summary>
